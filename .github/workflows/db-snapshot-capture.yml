@@ -10,11 +10,13 @@ on:
 jobs:
   snapshot:
     runs-on: ubuntu-latest
-    working-directory: 'api'
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+
+    - name: Go to api directory
+      run: cd api
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
