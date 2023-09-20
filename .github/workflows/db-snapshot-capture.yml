@@ -1,0 +1,36 @@
+name: Database Snapshot
+
+on:
+  schedule:
+    - cron: '0 0 * * 0,2,4,5'  # Schedule to run every 2 days on Sunday, Tuesday, Thursday, and Friday
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    working-directory: 'api'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 18.12.1
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Capture Database Snapshot
+      env:
+        SNAPLET_SOURCE_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/the_expert_dev
+      run: npx snaplet snapshot capture
+
+    - name: Create Tar Gz from Snapshot
+      run: tar -czvf snapshot/production_db_snapshot.tar.gz snapshot/
+
+    - name: Upload Snapshot Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: database-snapshot
+        path: snapshot/production_db_snapshot.tar.gz
