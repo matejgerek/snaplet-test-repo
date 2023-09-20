@@ -28,7 +28,7 @@ jobs:
 
     - name: Capture Database Snapshot
       env:
-        SNAPLET_SOURCE_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/the_expert_dev
+        SNAPLET_SOURCE_DATABASE_URL: ${{ secrets.SNAPLET_SOURCE_DATABASE_URL }}
       run: npx snaplet snapshot capture
 
     - name: Create Tar Gz from Snapshot
