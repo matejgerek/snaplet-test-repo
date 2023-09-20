@@ -38,4 +38,11 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: database-snapshot
-        path: snapshot/production_db_snapshot.tar.gz
+        path: production_db_snapshot.tar.gz
+
+    - name: Upload report to CDN
+      env:
+        BUNNY_CDN_CI_ARCHIVE_API_KEY: ${{secrets.BUNNY_CDN_CI_ARCHIVE_API_KEY}}
+        BUNNY_CDN_STORAGE_ZONE_NAME: theexpert-ci-archive
+      run: |
+        node ${{github.workspace}}/.github/workflows/uploadSnapshotToCdn
