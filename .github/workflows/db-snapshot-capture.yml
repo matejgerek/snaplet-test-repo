@@ -15,16 +15,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Go to api directory
-      run: cd api
-
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
         node-version: 18.12.1
 
     - name: Install dependencies
-      run: npm install
+      run: cd api && npm install
 
     - name: Capture Database Snapshot
       env:
