@@ -26,7 +26,7 @@ jobs:
     - name: Capture Database Snapshot
       env:
         SNAPLET_SOURCE_DATABASE_URL: ${{ secrets.SNAPLET_SOURCE_DATABASE_URL }}
-      run: npx snaplet snapshot capture
+      run: cd api && npx snaplet snapshot capture
 
     - name: Create Tar Gz from Snapshot
       run: tar -czvf snapshot/production_db_snapshot.tar.gz snapshot/
