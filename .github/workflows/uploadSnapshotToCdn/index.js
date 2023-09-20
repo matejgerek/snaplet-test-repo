@@ -1,4 +1,5 @@
 const fs = require('fs')
+const path = require("path");
 
 const cdnRequest = async (url, {
   method= 'GET',
@@ -44,6 +45,8 @@ const uploadFile = async (localFilePath) => {
 const main = async () => {
   console.log('uploading')
   const directory = await fs.promises.readdir('./', { withFileTypes: true })
+  const test = path.resolve('./production_db_snapshot.tar.gz')
+  console.log('resolved', test)
   console.log(directory)
 }
 
