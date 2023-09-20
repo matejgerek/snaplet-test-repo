@@ -30,7 +30,7 @@ const cdnRequest = async (url, {
 
 const uploadFile = async (localFilePath) => {
   const fileStream = fs.createReadStream(localFilePath)
-  const url = `${BUNNY_CDN_STORAGE_URL}/db-snapshots/`
+  const url = `${BUNNY_CDN_STORAGE_URL}/db-snapshots/production_db_snapshot.tar.gz`
   const response = await cdnRequest(url, {
     method: 'PUT',
     body: fileStream,
