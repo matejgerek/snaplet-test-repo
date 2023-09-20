@@ -37,6 +37,6 @@ jobs:
     - name: Upload report to CDN
       env:
         BUNNY_CDN_CI_ARCHIVE_API_KEY: ${{secrets.BUNNY_CDN_CI_ARCHIVE_API_KEY}}
-        BUNNY_CDN_STORAGE_ZONE_NAME: theexpert-ci-archive
+        BUNNY_CDN_STORAGE_ZONE_NAME: theexpert-dev-public
       run: |
         node ${{github.workspace}}/.github/workflows/uploadSnapshotToCdn

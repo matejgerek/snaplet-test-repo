@@ -1,6 +1,8 @@
 const fs = require('fs')
 const path = require("path");
 
+const BUNNY_CDN_STORAGE_URL = `https://storage.bunnycdn.com/${BUNNY_CDN_STORAGE_ZONE_NAME}`
+
 const cdnRequest = async (url, {
   method= 'GET',
   headers= {
@@ -27,8 +29,7 @@ const cdnRequest = async (url, {
 
 const uploadFile = async (localFilePath) => {
   const fileStream = fs.createReadStream(localFilePath)
-  const cdnFilePath = localFilePath.split(`${ARTIFACTS_DIRECTORY}/`)[1]
-  const url = `${BUNNY_CDN_STORAGE_URL}/${cdnFilePath}`
+  const url = `${BUNNY_CDN_STORAGE_URL}/db-snapshots`
   const response = await cdnRequest(url, {
     method: 'PUT',
     body: fileStream,
@@ -46,8 +47,8 @@ const main = async () => {
   console.log('uploading')
   const directory = await fs.promises.readdir('./', { withFileTypes: true })
   const test = path.resolve('./production_db_snapshot.tar.gz')
-  console.log('resolved', test)
-  console.log(directory)
+  const response = await uploadFile(test)
+  console.log(response)
 }
 
 main()
