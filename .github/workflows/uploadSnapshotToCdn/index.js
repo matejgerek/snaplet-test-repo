@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require("path");
+const cdnRequest = require("../cdnRequest");
 
 const BUNNY_CDN_STORAGE_ZONE_NAME = process.env.BUNNY_CDN_STORAGE_ZONE_NAME
 const BUNNY_CDN_STORAGE_URL = `https://storage.bunnycdn.com/${BUNNY_CDN_STORAGE_ZONE_NAME}`
