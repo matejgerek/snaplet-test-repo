@@ -39,7 +39,7 @@ const uploadFile = async (localFilePath) => {
     }
   })
   console.log(
-    `Uploaded ${cdnFilePath} to BunnyCDN. Response: ${JSON.stringify(response)}`
+    `Snapshot uploaded to BunnyCDN. Response: ${JSON.stringify(response)}`
   )
   return response
 }
