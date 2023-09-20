@@ -1,13 +1,14 @@
-const fs = require('fs')
+const fs = require('fs');
 const path = require("path");
 const cdnRequest = require("../cdnRequest");
 
-const BUNNY_CDN_STORAGE_ZONE_NAME = process.env.BUNNY_CDN_STORAGE_ZONE_NAME
-const BUNNY_CDN_STORAGE_URL = `https://storage.bunnycdn.com/${BUNNY_CDN_STORAGE_ZONE_NAME}`
+const SNAPSHOT_FILE_NAME = 'production_db_snapshot.tar.gz';
+const BUNNY_CDN_STORAGE_ZONE_NAME = process.env.BUNNY_CDN_STORAGE_ZONE_NAME;
+const BUNNY_CDN_STORAGE_URL = `https://storage.bunnycdn.com/${BUNNY_CDN_STORAGE_ZONE_NAME}`;
 
 const uploadFile = async (localFilePath) => {
-  const fileStream = fs.createReadStream(localFilePath)
-  const url = `${BUNNY_CDN_STORAGE_URL}/db-snapshots/production_db_snapshot.tar.gz`
+  const fileStream = fs.createReadStream(localFilePath);
+  const url = `${BUNNY_CDN_STORAGE_URL}/db-snapshots/production_db_snapshot.tar.gz`;
   const response = await cdnRequest(url, {
     method: 'PUT',
     body: fileStream,
@@ -15,19 +16,19 @@ const uploadFile = async (localFilePath) => {
       AccessKey: process.env.BUNNY_CDN_CI_ARCHIVE_API_KEY,
       'Content-Type': 'application/octet-stream',
     }
-  })
-  console.log(
-    `Snapshot uploaded to BunnyCDN. Response: ${JSON.stringify(response)}`
-  )
-  return response
+  });
+  console.log(`Snapshot uploaded to BunnyCDN. Response: ${JSON.stringify(response)}`);
+  return response;
 }
 
 const main = async () => {
-  console.log('uploading')
-  const directory = await fs.promises.readdir('./', { withFileTypes: true })
-  const test = path.resolve('./production_db_snapshot.tar.gz')
-  const response = await uploadFile(test)
-  console.log(response)
+  console.log('Finding snapshot file...')
+  const snapshot = path.resolve(`./${SNAPSHOT_FILE_NAME}`)
+  if (!fs.existsSync(snapshot)) {
+    throw new Error(`Snapshot file not found at ${snapshot}`)
+  }
+  await uploadFile(snapshot)
+  console.log('Uploading finished.')
 }
 
-main()
+main();
