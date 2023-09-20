@@ -21,7 +21,7 @@ jobs:
         node-version: 18.12.1
 
     - name: Install dependencies
-      run: cd api && npm install
+      run: cd api && npm install --force
 
     - name: Capture Database Snapshot
       env:
