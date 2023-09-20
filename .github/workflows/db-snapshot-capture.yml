@@ -1,11 +1,9 @@
 name: Database Snapshot
 
-# run on every push to main
 on:
   push:
     branches:
       - main
-
 
 jobs:
   snapshot:
@@ -28,8 +26,13 @@ jobs:
         SNAPLET_SOURCE_DATABASE_URL: ${{ secrets.SNAPLET_SOURCE_DATABASE_URL }}
       run: cd api && npx snaplet snapshot capture
 
-    - name: Create Tar Gz from Snapshot
-      run: tar -czvf snapshot/production_db_snapshot.tar.gz snapshot/
+    - name: Find and Compress Newest Snapshot
+      run: |
+        # Find the newest snapshot directory in .snaplet/snapshots
+        newest_snapshot_dir=$(find .snaplet/snapshots -type d -printf '%T@ %p\n' | sort -n | tail -1 | cut -f2- -d' ')
+        echo "Newest snapshot directory: $newest_snapshot_dir"
+        # Create a tar.gz archive of the newest snapshot
+        tar -czvf snapshot/production_db_snapshot.tar.gz -C "$newest_snapshot_dir" .
 
     - name: Upload Snapshot Artifact
       uses: actions/upload-artifact@v2
