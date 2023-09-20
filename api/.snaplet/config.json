@@ -1,0 +1,4 @@
+{
+  "targetDatabaseUrl": "postgresql://postgres:postgres@localhost:5432/the_expert_dev",
+  "publicKey": "-----BEGIN RSA PUBLIC KEY-----\nMIIBigKCAYEAt30LvrACdDhgPNpSp71d5rdZ5/p/HN+4dQbe2Dc4zuX/n7W5Lbuu\njwBvfvn2vuxoFWeDTHyYX6XGgGTlFgJR31eW9YX+/3ghBLkYn7T7L0yrqfh6Hd1z\nfeXNpy9SjUxxafTljauAvjCQd9A/Mv+5Pe/HFwK8jwfHvhWDopu5u+L0feLaBe/0\nfvDRM4m/XXUw8bm2sPac7UWf7UftGV3qukPAC7FDfM30Z0Y00YkG9c+boAIWmTkx\nmmGmpvfq8GQr+NxFNaZaJqpUq20aLZ7LLqBb0eDcIm5lOOPrfDNywBHAGcZkQSUr\n/vkBI/iXNIfVY4xkOnKO0qCCbVHuCUoFCeyAKr36MKklDTYR0a2t8z6mjOHKFqWL\n2zL7mymTF/hs1mlIloaFzzeTMANC6e6zb6SwYpbkSppuV+YNTZNSq7vJ8sevK6xo\npSr6fbCL5bcDJnjdZDHHSAKICZ1L8i7jRSoTJW/1QSpbk1sU8wKPFbj5OwuBgTe+\ndDVCylIEhBV1AgMBAAE=\n-----END RSA PUBLIC KEY-----\n"
+}
