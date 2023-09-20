@@ -43,7 +43,7 @@ const uploadFile = async (localFilePath) => {
 
 const main = async () => {
   console.log('uploading')
-  const directory = await fs.promises.readdir('.api/.snaplet', { withFileTypes: true })
+  const directory = await fs.promises.readdir('./api', { withFileTypes: true })
   console.log(directory)
 }
 
