@@ -19,6 +19,7 @@ jobs:
         node-version: 18.12.1
 
     - name: Install dependencies
+      # TODO: remove force
       run: cd api && npm install --force
 
     - name: Capture Database Snapshot
