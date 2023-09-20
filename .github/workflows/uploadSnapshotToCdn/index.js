@@ -5,6 +5,7 @@ const cdnRequest = require("../cdnRequest");
 const SNAPSHOT_FILE_NAME = 'production_db_snapshot.tar.gz';
 const BUNNY_CDN_STORAGE_ZONE_NAME = process.env.BUNNY_CDN_STORAGE_ZONE_NAME;
 const BUNNY_CDN_STORAGE_URL = `https://storage.bunnycdn.com/${BUNNY_CDN_STORAGE_ZONE_NAME}`;
+const ACCESS_KEY = process.env.BUNNY_CDN_DEV_API_KEY;
 
 const uploadFile = async (localFilePath) => {
   const fileStream = fs.createReadStream(localFilePath);
@@ -13,7 +14,7 @@ const uploadFile = async (localFilePath) => {
     method: 'PUT',
     body: fileStream,
     headers: {
-      AccessKey: process.env.BUNNY_CDN_CI_ARCHIVE_API_KEY,
+      AccessKey: ACCESS_KEY,
       'Content-Type': 'application/octet-stream',
     }
   });

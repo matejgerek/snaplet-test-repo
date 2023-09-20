@@ -40,6 +40,7 @@ jobs:
 
     - name: Capture Database Snapshot
       env:
+        # TODO: Add env to github
         SNAPLET_SOURCE_DATABASE_URL: ${{ secrets.SNAPLET_SOURCE_DATABASE_URL }}
       run: cd api && npx snaplet snapshot capture
 
@@ -53,7 +54,7 @@ jobs:
 
     - name: Upload report to CDN
       env:
-        # TODO: Rename env and upload to github
+        # TODO: Rename env and add to github
         BUNNY_CDN_CI_ARCHIVE_API_KEY: ${{secrets.BUNNY_CDN_CI_ARCHIVE_API_KEY}}
         BUNNY_CDN_STORAGE_ZONE_NAME: theexpert-dev-public
       run: |
