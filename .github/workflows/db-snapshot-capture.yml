@@ -1,8 +1,11 @@
 name: Database Snapshot
 
+# run on every push to main
 on:
-  schedule:
-    - cron: '0 0 * * 0,2,4,5'  # Schedule to run every 2 days on Sunday, Tuesday, Thursday, and Friday
+  push:
+    branches:
+      - main
+
 
 jobs:
   snapshot:
