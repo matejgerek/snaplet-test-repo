@@ -56,6 +56,6 @@ jobs:
       env:
         # TODO: Rename env and add to github
         BUNNY_CDN_CI_ARCHIVE_API_KEY: ${{secrets.BUNNY_CDN_CI_ARCHIVE_API_KEY}}
-        BUNNY_CDN_STORAGE_ZONE_NAME: theexpert-dev-public
+        BUNNY_CDN_STORAGE_ZONE_NAME: theexpert-dev-privat
       run: |
         node ${{github.workspace}}/.github/workflows/uploadSnapshotToCdn
