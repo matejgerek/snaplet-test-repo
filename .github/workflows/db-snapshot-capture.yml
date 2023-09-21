@@ -45,15 +45,15 @@ jobs:
       run: cd api && npx snaplet snapshot capture
 
     - name: Find Newest Snapshot Directory
+      id: find-newest-snapshot
       run: |
         # Find the newest snapshot directory in .snaplet/snapshots
         newest_snapshot_dir=$(find api/.snaplet/snapshots -type d -printf '%T@ %p\n' | sort -n | tail -1 | cut -f2- -d' ')
-        echo "Newest snapshot directory: $newest_snapshot_dir"
-        echo "::set-output name=newest_snapshot_dir::$newest_snapshot_dir"
+        echo "::set-env name=newest_snapshot_dir::$newest_snapshot_dir"
 
     - name: Compress Newest Snapshot
       run: |
-        newest_snapshot_dir=$(/bin/sh -c "echo ${{ needs.Find Newest Snapshot Directory.outputs.newest_snapshot_dir }}")
+        newest_snapshot_dir=${{ env.newest_snapshot_dir }}
         # Create a tar.gz archive of the newest snapshot
         tar -czvf production_db_snapshot.tar.gz -C "$newest_snapshot_dir" .
 
