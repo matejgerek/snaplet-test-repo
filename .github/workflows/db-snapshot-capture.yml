@@ -52,7 +52,6 @@ jobs:
         echo "::set-output name=newest_snapshot_dir::$newest_snapshot_dir"
 
     - name: Compress Newest Snapshot
-      needs: Find Newest Snapshot Directory
       run: |
         newest_snapshot_dir=$(/bin/sh -c "echo ${{ needs.Find Newest Snapshot Directory.outputs.newest_snapshot_dir }}")
         # Create a tar.gz archive of the newest snapshot
