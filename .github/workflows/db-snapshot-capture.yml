@@ -55,7 +55,9 @@ jobs:
     - name: Compress Snapshot
       env:
         SNAPSHOT: ${{ steps.find-newest-snapshot.outputs.SNAPSHOT }}
-      run: tar -czvf production_db_snapshot.tar.gz -C "$SNAPSHOT" .
+      run: |
+        echo "Compressing snapshot: $SNAPSHOT"
+        tar -czvf production_db_snapshot.tar.gz -C "$SNAPSHOT" .
 
 
     - name: Upload report to CDN
