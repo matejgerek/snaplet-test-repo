@@ -48,9 +48,7 @@ jobs:
       id: find-newest-snapshot
       run: |
         # Find the newest snapshot directory in .snaplet/snapshots
-        newest_snapshot_dir=$(find api/.snaplet/snapshots -type d -printf '%T@ %p\n' | sort -n | tail -1 | cut -f2- -d' ')
-        echo "Newest snapshot directory: $newest_snapshot_dir"
-        echo "SNAPSHOT=$newest_snapshot_dir" >> GITHUB_OUTPUT
+        echo "SNAPSHOT=$(find api/.snaplet/snapshots -type d -printf '%T@ %p\n' | sort -n | tail -1 | cut -f2- -d' ')" >> GITHUB_OUTPUT
 
     - name: Compress Snapshot
       env:
