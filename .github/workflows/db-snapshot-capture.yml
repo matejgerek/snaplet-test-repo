@@ -38,12 +38,6 @@ jobs:
       # TODO: remove force if not necessary
       run: cd api && npm install --force
 
-    - name: Capture database snapshot
-      env:
-        # TODO: Add env to github
-        SNAPLET_SOURCE_DATABASE_URL: ${{ secrets.SNAPLET_SOURCE_DATABASE_URL }}
-      run: cd api && npx snaplet snapshot capture
-
     - name: Find and Compress Newest Snapshot
       run: |
         # Find the newest snapshot directory in .snaplet/snapshots
