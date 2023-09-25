@@ -1,5 +1,3 @@
-const fetch = require('node-fetch');
-
 /**
  * Creates a curried function for making CDN requests to the specified URL.
  *
